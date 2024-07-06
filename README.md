@@ -1,43 +1,35 @@
-# Turborepo starter
+# Bounce - Checkout
 
-This is an official starter Turborepo.
+This project is part of Take Home Challenge for Bounce
 
-## Using this example
+## Goals
 
-Run the following command:
-
-```sh
-npx create-turbo@latest
-```
+The objective of this project is to create a checkout with a level of complexity and following a pre-defined UX design.
 
 ## What's inside?
 
-This Turborepo includes the following packages/apps:
+This project is a MonoRepo which includes the following packages:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `@bounce/web`: a [React.js](https://nextjs.org/) app
+- `@bounce/api`: a RestAPI
+- `@bounce/eslint-config`: `eslint` configurations
+- `@bounce/tsconfig`: `tsconfig.json`s used throughout the monorepo
+- `@bounce/prettier`: `prettier` configurations
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Prerequisites
 
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+To be able to run this project you need:
+- node >= 18 (https://nodejs.org/)
+- pnpm (https://pnpm.io/) as package manager
 
 ### Build
 
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
+cd bounce-checkout
 pnpm build
 ```
 
@@ -46,36 +38,18 @@ pnpm build
 To develop all apps and packages, run the following command:
 
 ```
-cd my-turborepo
+cd bounce-checkout
 pnpm dev
 ```
 
-### Remote Caching
+## Features
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+### Checkout
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+- [ ] It should be able to select the number of bags to be stored;
+- [ ] It should be able to fill personal details;
+- [ ] It should be able to update personal details before submit;
+- [ ] It should be able to fill payment information;
+- [ ] It should be able to submit checkout the block a storage spot;
+- [ ] It should be able to retry submit if anything happens during the request submit process;
 
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
