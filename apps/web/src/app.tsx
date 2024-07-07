@@ -1,10 +1,16 @@
-import { Button } from './components/ui/button'
+import './libs/i18n'
+import './global.css'
+
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { RouterProvider } from 'react-router-dom'
+
+import { router } from './ui/routes'
 
 export function App() {
   return (
-    <main>
-      <h1>checkout</h1>
-      <Button onClick={() => alert('click')}>Click me</Button>
-    </main>
+    <HelmetProvider>
+      <Helmet titleTemplate="%s | Bounce" />
+      <RouterProvider router={router} />
+    </HelmetProvider>
   )
 }
