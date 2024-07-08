@@ -9,9 +9,9 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-blue-400 hover:bg-blue-400/90',
-        success: 'bg-green-300 hover:bg-green-300/90',
-        danger: 'bg-red-500 hover:bg-red-500/90',
+        default: 'bg-blue-400 hover:bg-blue-400/90 focus:outline-blue-200',
+        success: 'bg-green-300 hover:bg-green-300/90 focus:outline-green-100',
+        danger: 'bg-red-500 hover:bg-red-500/90 focus:outline-red-300',
       },
       size: {
         default: 'w-full',

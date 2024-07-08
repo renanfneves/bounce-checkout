@@ -4,26 +4,35 @@ import React from 'react'
 import { cn } from '@/libs/utils'
 
 export interface InputCountProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  max?: number
+  onChangeCallback?: (value: number) => void
+  value?: number
+}
 
 const InputCount = React.forwardRef<HTMLInputElement, InputCountProps>(
-  ({ className, ...props }, ref) => {
-    const [value, setValue] = React.useState(1)
-
-    function handleSubtract() {
-      if (value === 1) return
-      setValue((prev) => prev - 1)
+  ({ className, max, onChangeCallback, value = 1, ...props }, ref) => {
+    const handleIncrement = () => {
+      if (max && value >= max) {
+        return
+      }
+      onChangeCallback?.(value + 1)
     }
 
-    function handleAdd() {
-      setValue((prev) => prev + 1)
+    const handleDecrement = () => {
+      if (value <= 1) {
+        return
+      }
+      onChangeCallback?.(value - 1)
     }
+
+    const disableIncrement = Boolean(max && value >= max)
 
     return (
       <div className="flex gap-2">
         <button
-          onClick={handleSubtract}
-          className="flex h-7 w-7 items-center justify-center rounded-sm bg-blue-400 p-2 disabled:bg-blue-400/50 disabled:text-black/50"
+          onClick={handleDecrement}
+          className="flex h-7 w-7 items-center justify-center rounded-sm bg-blue-400 p-2 focus:outline-blue-200 disabled:bg-blue-400/50 disabled:text-black/50"
           disabled={value <= 1}
           type="button"
         >
@@ -31,18 +40,15 @@ const InputCount = React.forwardRef<HTMLInputElement, InputCountProps>(
         </button>
         <input
           {...props}
-          className={cn(
-            'h-7 w-7 bg-inherit p-2 text-center text-sm',
-            className,
-          )}
+          className={cn('h-7 w-7 bg-inherit text-center text-sm', className)}
           value={value}
-          onChange={(evt) => setValue(evt.target.valueAsNumber)}
           disabled
           ref={ref}
         />
         <button
-          onClick={handleAdd}
-          className="flex h-7 w-7 items-center justify-center rounded-sm bg-blue-400 p-2"
+          onClick={handleIncrement}
+          disabled={disableIncrement}
+          className="flex h-7 w-7 items-center justify-center rounded-sm bg-blue-400 p-2 focus:outline-blue-200 disabled:bg-blue-400/50 disabled:text-black/50"
           type="button"
         >
           <PlusIcon size={20} />

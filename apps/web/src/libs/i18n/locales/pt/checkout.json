@@ -1,3 +1,37 @@
 {
-  "title": "checkout"
+  "title": "Checkout",
+  "form": {
+    "validation_messages": {
+      "required_name": "Nome é obrigatório",
+      "required_email": "Email é obrigatório",
+      "invalid_email": "Email inválido",
+      "required_card_number": "Os dados do cartão são obrigatórios",
+      "card_number_too_long": "Número do cartão muito longo, máximo 16 caracteres"
+    }
+  },
+  "order_details": {
+    "storage_label": "Reserva de armazenamento em:",
+    "number_of_bags": "Número de malas"
+  },
+  "personal_details": {
+    "sub_title": "Dados Pessoais:",
+    "name_label": "Nome",
+    "email_label": "Email",
+    "update_details": "editar?"
+  },
+  "payment_details": {
+    "sub_title": "Informações de Pagamento",
+    "card_details_label": "Detalhes do cartão"
+  },
+  "actions": {
+    "next": "Próximo",
+    "block": "Bloquear",
+    "retry": "Tentar novamente"
+  },
+  "feedbacks": {
+    "loading": "Fazendo Reserva ...",
+    "success": "Reserva Realizada!"
+  },
+  "watched_bags_count_one": "{{count}} mala",
+  "watched_bags_count_other": "{{count}} malas"
 }
