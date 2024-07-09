@@ -2,10 +2,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { FormProvider, useForm, useFormState } from 'react-hook-form'
-import { z } from 'zod'
 
 import { useTranslation } from '@/libs/i18n'
 
+import { useHandleFormActions } from './_hooks/use-handle-form-actions'
+import { usePlaceBooking } from './_hooks/use-place-booking'
+import { useSetActiveForm } from './_hooks/use-set-active-form'
+import { useValidateFullForm } from './_hooks/use-validate-full-form'
 import {
   placeBookingFormSchema,
   PlaceBookingFormTypeEnum,
@@ -18,14 +21,21 @@ import {
   PersonalDetailsProps,
 } from './sections/personal-details'
 
-export function Checkout() {
+interface CheckoutProps {
+  storageName?: string
+}
+
+export function Checkout({
+  storageName = 'Cody’s Cookie Store',
+}: CheckoutProps) {
   const { t } = useTranslation(['checkout'])
+  const { validateFullForm } = useValidateFullForm()
   const [successfullyPlaced, setSuccessfullyPlaced] = useState(false)
   const [isPersonalDetailsAlreadyTouched, setIsPersonalDetailsAlreadyTouched] =
     useState(false)
   const personalDataRef = useRef<PersonalDetailsProps>(null)
   const submitButtonRef = useRef<HTMLButtonElement>(null)
-  const isSubmitting = false
+  const { isPending, mutateAsync: placeABooking, isError } = usePlaceBooking()
 
   const formMethods = useForm({
     resolver: zodResolver(placeBookingFormSchema),
@@ -48,75 +58,57 @@ export function Checkout() {
   const { isValid } = useFormState({ control: formMethods.control })
   const activeForm = watch('activeForm')
 
-  const validateFullForm = useCallback(() => {
-    const numberOfBags = getValues('orderDetails.numberOfBags')
-    const name = getValues('personalDetails.name')
-    const email = getValues('personalDetails.email')
-    const cardDetails = getValues('paymentInformation.cardDetails')
-
-    const placeBookingFormSchema = z.object({
-      numberOfBags: z.number().int().min(1).max(2),
-      name: z.string().min(1),
-      email: z.string().email(),
-      cardDetails: z.string().min(1),
-    })
-
-    const placeBookingForm = {
-      numberOfBags,
-      name,
-      email,
-      cardDetails,
+  const placeBooking = useCallback(async () => {
+    try {
+      const numberOfBags = getValues('orderDetails.numberOfBags')
+      const name = getValues('personalDetails.name')
+      const email = getValues('personalDetails.email')
+      const cardDetails = getValues('paymentInformation.cardDetails')
+      const isFullFormValid = validateFullForm({
+        numberOfBags,
+        name,
+        email,
+        cardDetails,
+      })
+      if (!isFullFormValid) return
+      await placeABooking({
+        storageName,
+        numberOfBags,
+        name,
+        email,
+        cardDetails,
+      })
+      setSuccessfullyPlaced(true)
+      setIsPersonalDetailsAlreadyTouched(false)
+      formMethods.reset()
+      setTimeout(() => {
+        setSuccessfullyPlaced(false)
+      }, 2000)
+    } catch (error) {
+      console.error(error)
     }
-
-    return placeBookingFormSchema.safeParse(placeBookingForm).success
-  }, [getValues])
-
-  const placeBooking = useCallback(() => {
-    const isFullFormValid = validateFullForm()
-    if (!isFullFormValid) return
-    setSuccessfullyPlaced(true)
-    setIsPersonalDetailsAlreadyTouched(false)
-    formMethods.reset()
-    setTimeout(() => {
-      setSuccessfullyPlaced(false)
-    }, 3000)
-  }, [formMethods, validateFullForm])
-
-  const setActiveForm = useCallback(
-    (activeForm: PlaceBookingFormTypeEnum) => {
-      setValue('activeForm', activeForm)
-    },
-    [setValue],
-  )
-
-  const handleFormActions = useCallback(() => {
-    switch (activeForm) {
-      case PlaceBookingFormTypeEnum.OrderDetails:
-        setActiveForm(PlaceBookingFormTypeEnum.PersonalDetails)
-        break
-      case PlaceBookingFormTypeEnum.PersonalDetails:
-        setIsPersonalDetailsAlreadyTouched(true)
-        setActiveForm(PlaceBookingFormTypeEnum.PaymentInformation)
-        personalDataRef.current?.setIsEditingPersonalData(false)
-        break
-      case PlaceBookingFormTypeEnum.PaymentInformation:
-        placeBooking()
-        break
-    }
-  }, [activeForm, placeBooking, setActiveForm])
+  }, [formMethods, getValues, placeABooking, storageName, validateFullForm])
+  const { setActiveForm } = useSetActiveForm({
+    setValue,
+  })
+  const { handleFormActions } = useHandleFormActions({
+    activeForm,
+    placeBooking,
+    setActiveForm,
+    personalDataRef,
+    setIsPersonalDetailsAlreadyTouched,
+  })
 
   useEffect(() => {
     if (submitButtonRef.current) {
       submitButtonRef.current.focus()
     }
-
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Enter' && isValid) {
         event.preventDefault()
         handleSubmit(handleFormActions)()
       }
     }
-
     document.addEventListener('keydown', handleKeyDown)
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
@@ -126,7 +118,7 @@ export function Checkout() {
   return (
     <div className="relative w-full md:w-[23.438rem]">
       <Helmet title={t('title')} />
-      {isSubmitting && (
+      {isPending && (
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
           <span className="flex w-32 flex-wrap text-center text-3xl font-bold text-white">
             {t('feedbacks.loading')}
@@ -137,17 +129,17 @@ export function Checkout() {
       <FormProvider {...formMethods}>
         <form
           onSubmit={handleSubmit(handleFormActions)}
-          data-submitting={false}
+          data-submitting={isPending}
           className="relative flex h-[95vh] w-full flex-col overflow-y-scroll bg-white pt-4 data-[submitting=true]:blur-[2px]"
         >
-          <OrderDetails />
+          <OrderDetails storageName={storageName} />
           {(activeForm === 'PersonalDetails' ||
             activeForm === 'PaymentInformation') && (
             <PersonalDetails ref={personalDataRef} />
           )}
           {(activeForm === 'PaymentInformation' ||
             isPersonalDetailsAlreadyTouched) && <PaymentInformation />}
-          <CheckoutAction />
+          <CheckoutAction isSubmitting={isPending} shouldRetry={isError} />
         </form>
       </FormProvider>
       {successfullyPlaced && (

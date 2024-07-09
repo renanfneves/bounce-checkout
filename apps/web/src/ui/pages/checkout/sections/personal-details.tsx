@@ -24,7 +24,6 @@ const PersonalDetails = forwardRef<
 >((_, ref) => {
   const { t } = useTranslation('checkout')
   const [isEditingForm, setIsEditingForm] = useState(true)
-
   const { control } = useFormContext<PlaceBookingForm>()
 
   const handleSetEditing = useCallback((editing: boolean) => {
@@ -44,7 +43,9 @@ const PersonalDetails = forwardRef<
           <h2 className="text-xl font-normal">
             {t('personal_details.sub_title')}
           </h2>
-          <label htmlFor="name">{t('personal_details.name_label')}</label>
+          <label htmlFor="name" className="font-light">
+            {t('personal_details.name_label')}
+          </label>
           <Controller
             name="personalDetails.name"
             control={control}
@@ -56,14 +57,16 @@ const PersonalDetails = forwardRef<
               </>
             )}
           />
-          <label htmlFor="email">{t('personal_details.email_label')}</label>
+          <label htmlFor="email" className="font-light">
+            {t('personal_details.email_label')}
+          </label>
           <Controller
             name="personalDetails.email"
             control={control}
             defaultValue=""
             render={({ field, fieldState: { error } }) => (
               <>
-                <Input id="email" {...field} />
+                <Input id="email" type="email" {...field} />
                 <FormMessage>{error?.message}</FormMessage>
               </>
             )}

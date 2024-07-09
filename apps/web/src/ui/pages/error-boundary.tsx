@@ -9,11 +9,12 @@ export const ErrorBoundary = () => {
   const { t } = useTranslation()
 
   useEffect(() => {
+    // TODO: Send error log to a tool ex.: Sentry
     console.log(error)
   }, [error])
 
   return (
-    <section className="relative flex min-h-screen w-full flex-col justify-between bg-primary">
+    <section className="relative flex min-h-screen w-full flex-col items-center justify-between bg-primary">
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-5xl text-white" data-testid="notFoundPageTitle">
           {t('error_boundary.title')}

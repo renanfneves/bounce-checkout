@@ -5,8 +5,8 @@
       "required_name": "Nome é obrigatório",
       "required_email": "Email é obrigatório",
       "invalid_email": "Email inválido",
-      "required_card_number": "Os dados do cartão são obrigatórios",
-      "card_number_too_long": "Número do cartão muito longo, máximo 16 caracteres"
+      "invalid_card_number": "Dados do cartão inválidos",
+      "card_number_too_long": "Número do cartão muito longo, máximo 19 caracteres"
     }
   },
   "order_details": {
@@ -25,7 +25,7 @@
   },
   "actions": {
     "next": "Próximo",
-    "block": "Bloquear",
+    "book": "Agendar",
     "retry": "Tentar novamente"
   },
   "feedbacks": {

@@ -26,6 +26,12 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.1.0
         version: 1.1.0(@types/react@18.3.3)(react@18.3.1)
+      '@tanstack/react-query':
+        specifier: ^5.50.1
+        version: 5.50.1(react@18.3.1)
+      '@tanstack/react-query-devtools':
+        specifier: ^5.50.1
+        version: 5.50.1(@tanstack/react-query@5.50.1)(react@18.3.1)
       axios:
         specifier: ^1.7.2
         version: 1.7.2
@@ -149,6 +155,28 @@ importers:
         version: 0.6.5(prettier@3.2.5)
 
   config/typescript-config: {}
+
+  packages/env:
+    dependencies:
+      '@t3-oss/env-nextjs':
+        specifier: ^0.10.1
+        version: 0.10.1(typescript@5.4.5)(zod@3.23.8)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
+      '@bounce/eslint-config':
+        specifier: workspace:*
+        version: link:../../config/eslint-config
+      '@bounce/prettier':
+        specifier: workspace:*
+        version: link:../../config/prettier
+      '@bounce/tsconfig':
+        specifier: workspace:*
+        version: link:../../config/typescript-config
+      '@types/node':
+        specifier: ^20.12.7
+        version: 20.14.10
 
 packages:
 
@@ -1036,6 +1064,61 @@ packages:
   /@sinclair/typebox@0.27.8:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
+
+  /@t3-oss/env-core@0.10.1(typescript@5.4.5)(zod@3.23.8):
+    resolution: {integrity: sha512-GcKZiCfWks5CTxhezn9k5zWX3sMDIYf6Kaxy2Gx9YEQftFcz8hDRN56hcbylyAO3t4jQnQ5ifLawINsNgCDpOg==}
+    peerDependencies:
+      typescript: '>=5.0.0'
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      typescript: 5.4.5
+      zod: 3.23.8
+    dev: false
+
+  /@t3-oss/env-nextjs@0.10.1(typescript@5.4.5)(zod@3.23.8):
+    resolution: {integrity: sha512-iy2qqJLnFh1RjEWno2ZeyTu0ufomkXruUsOZludzDIroUabVvHsrSjtkHqwHp1/pgPUzN3yBRHMILW162X7x2Q==}
+    peerDependencies:
+      typescript: '>=5.0.0'
+      zod: ^3.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@t3-oss/env-core': 0.10.1(typescript@5.4.5)(zod@3.23.8)
+      typescript: 5.4.5
+      zod: 3.23.8
+    dev: false
+
+  /@tanstack/query-core@5.50.1:
+    resolution: {integrity: sha512-lpfhKPrJlyV2DSVcQb/HuozH3Av3kws4ge22agx+lNGpFkS4vLZ7St0l3GLwlAD+bqB+qXGex3JdRKUNtMviEQ==}
+    dev: false
+
+  /@tanstack/query-devtools@5.50.1:
+    resolution: {integrity: sha512-MQ5JK3yRwBP1SRuwoJVPGZP4cMLXCQ0t+6blDbcAVGEoqrEuvbgTdwlN729AKBR0hidOWPFR9n5YpI2Y8bBZOQ==}
+    dev: false
+
+  /@tanstack/react-query-devtools@5.50.1(@tanstack/react-query@5.50.1)(react@18.3.1):
+    resolution: {integrity: sha512-zgPmEFv9GhLAx6eaf9r0ACbcxit1ZSuv/uPpOXBTTSPLijlWcfpQTOdZx0jYQ14t2cUfWjrAW41cUmcCvT4X/g==}
+    peerDependencies:
+      '@tanstack/react-query': ^5.50.1
+      react: ^18 || ^19
+    dependencies:
+      '@tanstack/query-devtools': 5.50.1
+      '@tanstack/react-query': 5.50.1(react@18.3.1)
+      react: 18.3.1
+    dev: false
+
+  /@tanstack/react-query@5.50.1(react@18.3.1):
+    resolution: {integrity: sha512-s0DW3rVBDPReDDovUjVqItVa3R2nPfUANK9nqGvarO2DwTiY9U4EBTsqizMxItRCoGgK5apeM7D3mxlHrSKpdQ==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.50.1
+      react: 18.3.1
+    dev: false
 
   /@testing-library/dom@10.3.1:
     resolution: {integrity: sha512-q/WL+vlXMpC0uXDyfsMtc1rmotzLV8Y0gq6q1gfrrDjQeHoeLrqHbxdPvPNAh1i+xuJl7+BezywcXArz7vLqKQ==}
@@ -4361,7 +4444,6 @@ packages:
   /typescript@5.4.5:
     resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
     engines: {node: '>=14.17'}
-    dev: true
 
   /ufo@1.5.3:
     resolution: {integrity: sha512-Y7HYmWaFwPUmkoQCUIAYpKqkOf+SbVj/2fJJZ4RJMCfZp0rTGwRbzQD+HghfnhKOjL9E01okqz+ncJskGYfBNw==}

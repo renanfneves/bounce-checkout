@@ -1,0 +1,37 @@
+{
+  "title": "Checkout",
+  "form": {
+    "validation_messages": {
+      "required_name": "Name is required",
+      "required_email": "Email is required",
+      "invalid_email": "Invalid email",
+      "invalid_card_number": "Invalid card number",
+      "card_number_too_long": "Card number too long, max 19 characters"
+    }
+  },
+  "order_details": {
+    "storage_label": "Booking storage at:",
+    "number_of_bags": "Number of bags"
+  },
+  "personal_details": {
+    "sub_title": "Personal Details:",
+    "name_label": "Name",
+    "email_label": "Email",
+    "update_details": "change?"
+  },
+  "payment_details": {
+    "sub_title": "Payment Information",
+    "card_details_label": "Card Details"
+  },
+  "actions": {
+    "next": "Next",
+    "book": "Book",
+    "retry": "Retry"
+  },
+  "feedbacks": {
+    "loading": "Placing Booking...",
+    "success": "Booking Placed!"
+  },
+  "watched_bags_count_one": "{{count}} bag",
+  "watched_bags_count_other": "{{count}} bags"
+}
