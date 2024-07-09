@@ -18,13 +18,13 @@ This project is a MonoRepo which includes the following packages:
 - `@bounce/tsconfig`: `tsconfig.json`s used throughout the monorepo
 - `@bounce/prettier`: `prettier` configurations
 
-### Prerequisites
+## Prerequisites
 
 To be able to run this project you need:
 - node >= 18 (https://nodejs.org/)
 - pnpm (https://pnpm.io/) as package manager
 
-### Build
+## Build
 
 To build all apps and packages, run the following command:
 
@@ -33,13 +33,33 @@ cd bounce-checkout
 pnpm build
 ```
 
-### Develop
+## Develop
 
-To develop all apps and packages, run the following command:
+To develop all apps and packages, run the following command on monorepo root:
 
 ```
 cd bounce-checkout
 pnpm dev
+```
+
+ps.: By running dev all server apis are mocked by MSW handlers
+
+## Tests
+
+### Web App e2e tests
+
+To run web app e2e test get in web app directory
+
+```
+cd bounce-checkout/apps/web
+pnpm e2e:test
+```
+
+You can still run e2e tests in ui mode
+
+```
+cd bounce-checkout/apps/web
+pnpm e2e:test:ui
 ```
 
 ## Features
