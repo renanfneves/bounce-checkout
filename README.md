@@ -82,3 +82,8 @@ pnpm test
 - [ ] It should be able to submit checkout the block a storage spot;
 - [ ] It should be able to retry submit if anything happens during the request submit process;
 
+## Other Docs
+
+You can follow a Kanban Board create for this project where all task and feature were planned, refined and developed.
+You can find it on Projects tab in this repository.
+
