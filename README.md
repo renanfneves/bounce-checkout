@@ -84,6 +84,6 @@ pnpm test
 
 ## Other Docs
 
-You can follow a Kanban Board create for this project where all task and feature were planned, refined and developed.
-You can find it on Projects tab in this repository.
+You can follow a Kanban Board created for this project where all tasks and features were planned, refined and developed.
+You will find it on Projects tab in this repository.
 
