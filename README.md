@@ -6,6 +6,12 @@ This project is part of Take Home Challenge for Bounce
 
 The objective of this project is to create a checkout with a level of complexity and following a pre-defined UX design.
 
+## Mockup
+
+![alt text](image.png)
+
+https://www.figma.com/file/6e6aS0zKBrPST8KSWN2CcS/Booking-Flow?node-id=1%3A3604
+
 ## What's inside?
 
 This project is a MonoRepo which includes the following packages:
