@@ -40,7 +40,10 @@ const PersonalDetails = forwardRef<
     <section className="flex flex-col gap-2 p-4">
       {isEditingForm ? (
         <>
-          <h2 className="text-xl font-normal">
+          <h2
+            className="text-xl font-normal"
+            data-testid="personalDetailsTitle"
+          >
             {t('personal_details.sub_title')}
           </h2>
           <label htmlFor="name" className="font-light">
@@ -52,7 +55,7 @@ const PersonalDetails = forwardRef<
             defaultValue=""
             render={({ field, fieldState: { error } }) => (
               <>
-                <Input id="name" {...field} />
+                <Input id="name" {...field} data-testid="inputName" />
                 <FormMessage>{error?.message}</FormMessage>
               </>
             )}
@@ -66,7 +69,12 @@ const PersonalDetails = forwardRef<
             defaultValue=""
             render={({ field, fieldState: { error } }) => (
               <>
-                <Input id="email" type="email" {...field} />
+                <Input
+                  id="email"
+                  type="email"
+                  {...field}
+                  data-testid="inputEmail"
+                />
                 <FormMessage>{error?.message}</FormMessage>
               </>
             )}
@@ -78,6 +86,7 @@ const PersonalDetails = forwardRef<
           className="h-20 justify-between"
           type="button"
           onClick={() => handleSetEditing(true)}
+          data-testid="changePersonalDetailsButton"
         >
           <span>{t('personal_details.sub_title')}</span>
           <span>{t('personal_details.update_details')}</span>

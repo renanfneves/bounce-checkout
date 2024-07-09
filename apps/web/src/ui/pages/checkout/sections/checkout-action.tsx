@@ -50,12 +50,19 @@ export function CheckoutAction({
   return (
     <section className="mt-auto flex items-center justify-between border-t border-black px-4 py-6">
       <div className="flex flex-col">
-        <span className="text-sm">
+        <span className="text-sm" data-testid="checkoutNumberOfBags">
           {t('watched_bags_count', { count: numberOfBags })}
         </span>
-        <span className="text-xl font-bold">{price}</span>
+        <span className="text-xl font-bold" data-testid="checkoutPrice">
+          {price}
+        </span>
       </div>
-      <Button size="submit" disabled={disabled} variant={variant}>
+      <Button
+        size="submit"
+        disabled={disabled}
+        variant={variant}
+        data-testid="checkoutActionButton"
+      >
         {actionLabel}
       </Button>
     </section>

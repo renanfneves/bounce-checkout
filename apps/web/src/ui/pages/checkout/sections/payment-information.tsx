@@ -12,7 +12,9 @@ export function PaymentInformation() {
 
   return (
     <section className="mt-2 flex flex-col gap-2 border-t border-gray-300 p-4">
-      <h2 className="text-xl font-normal">{t('payment_details.sub_title')}</h2>
+      <h2 className="text-xl font-normal" data-testid="paymentInformationTitle">
+        {t('payment_details.sub_title')}
+      </h2>
       <label htmlFor="cardDetails" className="font-light">
         {t('payment_details.card_details_label')}
       </label>
@@ -30,6 +32,7 @@ export function PaymentInformation() {
               name={name}
               value={value}
               onChangeCallback={onChange}
+              data-testid="inputCardDetails"
             />
             <FormMessage>{error?.message}</FormMessage>
           </>

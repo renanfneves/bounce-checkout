@@ -35,6 +35,7 @@ const InputCount = React.forwardRef<HTMLInputElement, InputCountProps>(
           className="flex h-7 w-7 items-center justify-center rounded-sm bg-blue-400 p-2 focus:outline-blue-200 disabled:bg-blue-400/50 disabled:text-black/50"
           disabled={value <= 1}
           type="button"
+          data-testid="decrementCount"
         >
           <MinusIcon size={20} />
         </button>
@@ -44,12 +45,14 @@ const InputCount = React.forwardRef<HTMLInputElement, InputCountProps>(
           value={value}
           disabled
           ref={ref}
+          data-testid="inputCountValue"
         />
         <button
           onClick={handleIncrement}
           disabled={disableIncrement}
           className="flex h-7 w-7 items-center justify-center rounded-sm bg-blue-400 p-2 focus:outline-blue-200 disabled:bg-blue-400/50 disabled:text-black/50"
           type="button"
+          data-testid="incrementCount"
         >
           <PlusIcon size={20} />
         </button>

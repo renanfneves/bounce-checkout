@@ -85,7 +85,8 @@ export function Checkout({
         setSuccessfullyPlaced(false)
       }, 2000)
     } catch (error) {
-      console.error(error)
+      // TODO: Log error to error tracking service
+      console.log(error)
     }
   }, [formMethods, getValues, placeABooking, storageName, validateFullForm])
   const { setActiveForm } = useSetActiveForm({
@@ -119,7 +120,10 @@ export function Checkout({
     <div className="relative w-full md:w-[23.438rem]">
       <Helmet title={t('title')} />
       {isPending && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"
+          data-testid="loadingSplashScreen"
+        >
           <span className="flex w-32 flex-wrap text-center text-3xl font-bold text-white">
             {t('feedbacks.loading')}
           </span>
@@ -143,7 +147,10 @@ export function Checkout({
         </form>
       </FormProvider>
       {successfullyPlaced && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-white">
+        <div
+          className="absolute inset-0 z-50 flex items-center justify-center bg-white"
+          data-testid="successSplashScreen"
+        >
           <span className="flex w-32 flex-wrap text-center text-3xl font-bold text-black">
             {t('feedbacks.success')}
           </span>
