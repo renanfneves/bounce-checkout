@@ -62,6 +62,15 @@ cd bounce-checkout/apps/web
 pnpm e2e:test:ui
 ```
 
+### Web App integration tests
+
+To run web app e2e test get in web app directory
+
+```
+cd bounce-checkout/apps/web
+pnpm test
+```
+
 ## Features
 
 ### Checkout
