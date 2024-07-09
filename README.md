@@ -93,3 +93,8 @@ pnpm test
 You can follow a Kanban Board created for this project where all tasks and features were planned, refined and developed.
 You will find it on Projects tab in this repository.
 
+## Pipelines
+
+For this MVP version you can find a pipeline setup for staging environment.
+To run it is just necessary push any code on staging branch to fire the github actions
+
