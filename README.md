@@ -30,6 +30,15 @@ To be able to run this project you need:
 - node >= 18 (https://nodejs.org/)
 - pnpm (https://pnpm.io/) as package manager
 
+## Install Packages
+
+Before build or running this project you need to:
+
+```
+cd bounce-checkout
+pnpm install
+```
+
 ## Build
 
 To build all apps and packages, run the following command:
