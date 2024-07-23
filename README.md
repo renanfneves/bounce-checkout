@@ -1,6 +1,4 @@
-# Bounce - Checkout
-
-This project is part of Take Home Challenge for Bounce
+# Multi Schema Checkout
 
 ## Goals
 
